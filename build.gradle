@@ -38,8 +38,8 @@ publishing {
 			name = "GitHubPackages"
 			url = "https://maven.pkg.github.com/klsorge/bulletin-board"
 			credentials {
-				username = project.findProperty("gpr.user")
-				password = project.findProperty("gpr.key")
+				username = "${USER}"
+				password = "${TOKEN}"
 			}
 		}
 	}
