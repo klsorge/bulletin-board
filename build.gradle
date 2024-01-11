@@ -2,10 +2,10 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.2.1'
 	id 'io.spring.dependency-management' version '1.1.4'
+	id 'maven-publish'
 }
 
 group = 'com.klsorge'
-version = '0.0.1-SNAPSHOT'
 
 java {
 	sourceCompatibility = '17'
@@ -30,4 +30,30 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+publishing {
+	repositories {
+		maven {
+			name = "GitHubPackages"
+			url = "https://maven.pkg.github.com/klsorge/bulletin-board"
+			credentials {
+				username = project.findProperty("gpr.user")
+				password = project.findProperty("gpr.key")
+			}
+		}
+	}
+	publications {
+		mavenJava(MavenPublication) {
+			from(components.java)
+			versionMapping {
+				usage('java-api') {
+					fromResolutionOf('runtimeClasspath')
+				}
+				usage('java-runtime') {
+					fromResolutionResult()
+				}
+			}
+		}
+	}
 }
