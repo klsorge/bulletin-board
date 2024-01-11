@@ -1,0 +1,14 @@
+name: Environment Variable Test
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Environment
+        run: echo "USER=$USER"
+        env:
+          USER: ${{ github.actor }}
