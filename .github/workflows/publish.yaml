@@ -26,7 +26,7 @@ jobs:
       - name: Build and Publish
         uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25
         with:
-          arguments: build publish
+          arguments: build publish -DUSER=$USER -DTOKEN=$TOKEN
         env:
           USER: ${{ github.actor }}
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
